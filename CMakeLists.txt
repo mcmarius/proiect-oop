@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.24)
 # for now, the project name is used as the executable name
 project(oop)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -102,7 +102,7 @@ message("Compiler: ${CMAKE_CXX_COMPILER_ID} version ${CMAKE_CXX_COMPILER_VERSION
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE /W4 /permissive- /wd4244 /wd4267 /wd4996 /external:anglebrackets /external:W0)
 else()
-    target_compile_options(${PROJECT_NAME} PRIVATE -fno-elide-constructors -Wall -Wextra -pedantic)
+    target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -pedantic)
 endif()
 
 ###############################################################################
