@@ -5,7 +5,7 @@ class Facultate {
 //    std::vector<Student> studenti;
     std::string nume = "FMI";
 public:
-    Facultate(std::string nume_) : nume(nume_) {
+    explicit Facultate(const std::string& nume_) : nume(nume_) {
         std::cout << "constr de initializare facultate\n";
     }
     Facultate(const Facultate& other) : nume(other.nume) {
@@ -44,7 +44,7 @@ public:
         this->grupa = other.grupa;
         std::cout << "constr copiere student end\n";
     }
-    Student(std::string nume_, int grupa_) : nume(nume_), grupa(grupa_) {
+    Student(const std::string& nume_, int grupa_) : nume(nume_), grupa(grupa_) {
 //        nume = nume_;
 //        grupa = grupa_;
         std::cout << "constr student\n";
@@ -95,6 +95,6 @@ int main() {
 //    st.setNume("test");
     std::cout << st.getNume() << " " << st.getGrupa() << "\n";
     std::cout << fmi;
-    std::cout << st << st1 << st4;
+    std::cout << st << st1 << st4 << sm << st3;
     return 0;
 }
