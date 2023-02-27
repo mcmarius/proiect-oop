@@ -62,7 +62,7 @@ public:
 };
 
 void f(Student stud) {
-    std::cout << "f: " << stud.getGrupa() << "\n";
+    std::cout << "f: " << stud.getGrupa() << " " << stud.getFacultate() << "\n";
 }
 
 Student st_mate() {
