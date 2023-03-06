@@ -25,11 +25,45 @@ public:
     }
 };
 
+class Materie {
+    std::string nume = "OOP";
+    const int dificultate = 2;
+public:
+    Materie(const std::string &nume, int dificultate) : nume(nume), dificultate(dificultate) {}
+    Materie(const Materie& other) : nume(other.nume), dificultate(other.dificultate) {
+        std::cout << "constr de copiere materie\n";
+    }
+    Materie& operator=(const Materie& other) {
+        if(this != &other) {
+            this->nume = other.nume;
+//            this->dificultate = other.dificultate;
+        }
+        std::cout << "op= materie\n";
+        return *this;
+    }
+
+    const std::string& getNume() const {
+        //this->nume = "aaa";
+        return nume;
+    }
+
+    ~Materie() {
+        std::cout << "destr materie\n";
+    }
+
+    friend std::ostream &operator<<(std::ostream &os, const Materie &materie) {
+        os << "nume: " << materie.nume << " dificultate: " << materie.dificultate;
+        return os;
+    }
+
+};
+
 class Student {
     Facultate facultate{"FMI Unibuc"};
 //    Facultate facultate ;//{"FMI Unibuc"};
     std::string nume = "test";
     int grupa = 100;
+    std::vector<Materie> materii;
 public:
 //     Student() : facultate("FMI Unibuc") {
     Student() {
@@ -55,8 +89,12 @@ public:
     Facultate getFacultate() { return facultate; }
     std::string getNume() { return nume; }
     int getGrupa() { return grupa; }
-    friend std::ostream& operator<<(std::ostream& os, const Student& st) {
-        os << "op<< stud: " << st.facultate << " " << st.nume << " " << st.grupa << "\n";
+
+    friend std::ostream &operator<<(std::ostream &os, const Student &student) {
+        os << "facultate: " << student.facultate << " nume: " << student.nume << " grupa: " << student.grupa
+           << " materii:\n";
+        for(const auto& materie : student.materii)
+            os << materie;
         return os;
     }
 };
@@ -72,6 +110,11 @@ Student st_mate() {
 }
 
 int main() {
+    Materie m1{"oop", 5}, m2{m1}, m3{m1};
+    m1 = m2 = m3;
+    m1.operator=(m2.operator=(m3));
+
+
     Facultate fmi{"FMI"}, fmi_cluj = fmi;
     Facultate poli{"Poli"}, ase{"Ase"};
     poli = ase;
