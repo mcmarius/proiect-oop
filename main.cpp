@@ -1,8 +1,12 @@
 #include <iostream>
 #include <vector>
 
-//class Sala {
-//};
+//#pragma pack(1)
+//#pragma pack(2)
+//#pragma pack(3)
+
+class Sala {
+};
 
 class Facultate {
 //    std::vector<Student> studenti;
@@ -32,7 +36,9 @@ class Materie {
     std::string nume = "OOP";
     const int dificultate = 2;
 public:
-    Materie(const std::string &nume, int dificultate) : nume(nume), dificultate(dificultate) {}
+    Materie(const std::string &nume, int dificultate) : nume(nume), dificultate(dificultate) {
+        std::cout << "constr de inițializare materie\n";
+    }
     Materie(const Materie& other) : nume(other.nume), dificultate(other.dificultate) {
         std::cout << "constr de copiere materie\n";
     }
@@ -59,6 +65,33 @@ public:
         return os;
     }
 
+};
+
+class MaterieObligatorie : Materie {
+    int nrPrezente;
+public:
+    MaterieObligatorie() : Materie("oop", 9), nrPrezente(10) {
+        std::cout << "constr de inițializare materie obligatorie\n";
+    }
+    ~MaterieObligatorie() {
+        std::cout << "destr materie obligatorie\n";
+    }
+    /*MaterieObligatorie(const MaterieObligatorie& other) : Materie(other), nrPrezente(other.nrPrezente) {}
+    MaterieObligatorie& operator=(const MaterieObligatorie& other) {
+        Materie::operator=(other);
+        // static_cast<Materie&>(*this) = other;
+        // Materie& materie_ = *this;
+        // materie_ = other;
+        nrPrezente = other.nrPrezente;
+        return *this;
+    }*/
+    MaterieObligatorie(const std::string &nume, int dificultate, int nrPrezente) : Materie(nume, dificultate),
+                                                                                   nrPrezente(nrPrezente) {}
+
+    friend std::ostream &operator<<(std::ostream &os, const MaterieObligatorie &obligatorie) {
+        os << static_cast<const Materie &>(obligatorie) << " nrPrezente: " << obligatorie.nrPrezente;
+        return os;
+    }
 };
 
 class Student {
@@ -112,11 +145,87 @@ Student st_mate() {
     return tmp;
 }
 
-int main() {
-    //Sala s1, s2 = s1;
-    //s2 = s1;
+class cls1 {
+    double v{};
+    long long x{};
+    int u{};
+    char w{};
+    char t{};
+};
 
-    Materie m1{"oop", 5}, m2{m1}, m3{m1};
+
+class curs_nv1 {};
+
+class curs_nv2 {
+public:
+    void f() {}
+    void f2() {}
+};
+
+class curs_v1 {
+public:
+    virtual void f() {}
+};
+
+class curs_v2 {
+public:
+    virtual void f() {}
+    virtual void g() {}
+};
+
+#include <iostream>
+
+class baza {
+public:
+    virtual void f() { std::cout << "f baza\n"; }
+};
+
+class derivata : public baza {
+public:
+    void f() override { std::cout << "f derivata\n"; }
+};
+
+void g1(baza& b) {
+    b.f();
+}
+
+void g2(baza* b) {
+    b->f();
+}
+
+void h(baza b) {
+    b.f();
+}
+
+int main() {
+    baza b;
+    derivata d;
+    std::cout << "----- g1(b) -----\n";
+    g1(b);
+    std::cout << "----- g2(&b) -----\n";
+    g2(&b);
+    std::cout << "----- h(b) -----\n";
+    h(b);
+    std::cout << "----- g1(d) -----\n";
+    g1(d);
+    std::cout << "----- g2(&d) -----\n";
+    g2(&d);
+    std::cout << "----- h(d) -----\n";
+    h(d);
+
+    std::cout << "sizeof(curs_nv1): " << sizeof(curs_nv1) << "\n";
+    std::cout << "sizeof(curs_nv2): " << sizeof(curs_nv2) << "\n";
+    std::cout << "sizeof(curs_v1): " << sizeof(curs_v1) << "\n";
+    std::cout << "sizeof(curs_v2): " << sizeof(curs_v2) << "\n";
+    std::cout << sizeof(Sala) << "\n";
+    std::cout << sizeof(cls1) << "\n";
+//    return 0;
+    MaterieObligatorie oop; // c m, c mo
+    Materie m1{"oop", 5}, m2{m1}, m3{m1}; // c m, c m, c m
+    // d m, d m, d m, d mo, d m
+
+
+
     m1 = m2 = m3;
     m1.operator=(m2.operator=(m3));
 
