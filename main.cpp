@@ -151,6 +151,11 @@ class cls1 {
     int u{};
     char w{};
     char t{};
+public:
+    friend std::ostream &operator<<(std::ostream &os, const cls1 &cls1) {
+        os << "v: " << cls1.v << " x: " << cls1.x << " u: " << cls1.u << " w: " << cls1.w << " t: " << cls1.t;
+        return os;
+    }
 };
 
 
@@ -213,8 +218,17 @@ int main() {
     std::cout << "----- h(d) -----\n";
     h(d);
 
+    curs_nv2 nv2;
+    nv2.f();
+    nv2.f2();
+    curs_v1 v1;
+    v1.f();
+    curs_v2 v2;
+    v2.f();
+    v2.g();
     std::cout << "sizeof(curs_nv1): " << sizeof(curs_nv1) << "\n";
     std::cout << "sizeof(curs_nv2): " << sizeof(curs_nv2) << "\n";
+    std::cout << "sizeof(nv2): " << sizeof(nv2) << "\n";
     std::cout << "sizeof(curs_v1): " << sizeof(curs_v1) << "\n";
     std::cout << "sizeof(curs_v2): " << sizeof(curs_v2) << "\n";
     std::cout << sizeof(Sala) << "\n";
