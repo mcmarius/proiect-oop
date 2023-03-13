@@ -1,6 +1,9 @@
 #include <iostream>
 #include <vector>
 
+//class Sala {
+//};
+
 class Facultate {
 //    std::vector<Student> studenti;
     std::string nume = "FMI";
@@ -110,6 +113,9 @@ Student st_mate() {
 }
 
 int main() {
+    //Sala s1, s2 = s1;
+    //s2 = s1;
+
     Materie m1{"oop", 5}, m2{m1}, m3{m1};
     m1 = m2 = m3;
     m1.operator=(m2.operator=(m3));
@@ -137,7 +143,11 @@ int main() {
     std::cout << st.getNume() << " " << st.getGrupa() << "\n";
 //    st.setNume("test");
     std::cout << st.getNume() << " " << st.getGrupa() << "\n";
-    std::cout << fmi;
+    std::cout << fmi; // << " ceva " << st;
+    // operator<<(std::cout, fmi);
+    // fmi.operator<<(std::cout)
+    //fmi << std::cout
+    // std::cout.operator<<(fmi);
     std::cout << st << st1 << st4 << sm << st3;
     return 0;
 }
