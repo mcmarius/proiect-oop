@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <string>
 
 //#pragma pack(1)
 //#pragma pack(2)
@@ -258,6 +259,14 @@ int main() {
     Student st4{st1};
 
     std::cout << "după apel st_mate\n";
+    try {
+        int x = std::stoi("123");
+        int y = std::stoi("qwerty");
+        int z = std::stoi("123");
+        std::cout << x << " " << y << " " << z << "\n";
+    } catch(std::logic_error& err) {
+        std::cout << "err: " << err.what() << "\n";
+    }
 //    st.facultate = fmi;5
 //    st.setFacultate(fmi);
     std::cout << st.getNume() << " " << st.getGrupa() << "\n";
